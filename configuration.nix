@@ -41,14 +41,14 @@
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    #package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
-  fileSystems."/home/shinji/dev" = {
-    device = "/dev/disk/by-uuid/5e68d2ac-cc77-40ed-a1b8-e78cf444c91c";
-    fsType = "ext4";
-    options = [ "user" "nofail" "uid=1000" "gid=1000" ];
-  };
+  #fileSystems."/home/shinji/dev" = {
+  #  device = "/dev/disk/by-uuid/5e68d2ac-cc77-40ed-a1b8-e78cf444c91c";
+  #  fsType = "ext4";
+  #  options = [ "user" "nofail" "uid=1000" "gid=1000" ];
+  #};
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -83,13 +83,13 @@
   };
 
   i18n.inputMethod = {
-    #type = "kime";
-    #package = lib.mkForce (pkgs.kime.overrideAttrs { RUSTFLAGS="-Clink-args=-L./target/release"; });
+    type = "kime";
+    package = lib.mkForce (pkgs.kime.overrideAttrs { RUSTFLAGS="-Clink-args=-L./target/release"; });
     enable = true;
-    type = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-hangul
-    ];
+    #type = "fcitx5";
+    #fcitx5.addons = with pkgs; [
+    #  fcitx5-hangul
+    #];
   };
 
   # Enable the X11 windowing system.
@@ -109,7 +109,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -154,21 +154,21 @@
     rofi-wayland
     pamixer
     pavucontrol
+    remmina
   ];
 
   fonts.packages = with pkgs; [
     noto-fonts
-    fira-code
     noto-fonts-cjk-sans
     jetbrains-mono
+    fira-code
     font-awesome
     d2coding
-    fantasque-sans-mono
-    nerdfonts
+    #nerdfonts
     #(nerdfonts.override {fonts = ["JetBrainsMono"];}) # stable banch
-    #nerd-fonts.jetbrains-mono # unstable
-    #nerd-fonts.fira-code # unstable
-    #nerd-fonts.fantasque-sans-mono #unstable
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+    nerd-fonts.d2coding
   ];
 
   programs = {
