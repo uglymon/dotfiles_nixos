@@ -131,7 +131,7 @@
   users.users.shinji = {
     isNormalUser = true;
     description = "shinji";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "input" ];
     packages = with pkgs; [
     #  thunderbird
     ];
